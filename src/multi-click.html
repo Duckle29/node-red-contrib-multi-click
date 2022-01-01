@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    RED.nodes.registerType('multi click', {
+        category: 'function',
+        color: '#a6bbcf',
+        inputs: 1,
+        outputs: 4,
+        defaults: {
+            name: { value: "" },
+            triggerProperty: { value: "payload", required: true },
+            triggerPropertyType: { value: "msg", required: true },
+            eventDown: { value: "pressed" },
+            eventUp: { value: "released" },
+            timeout: { value: 0, validate: RED.validators.number() }
+        },
+        outputLabels: [
+            "single",
+            "double",
+            "hold",
+            "release"
+        ],
+        oneditprepare: function () {
+            if (!this.triggerPropertyType) {
+                this.triggerPropertyType = 'msg';
+            }
+            $("#node-input-triggerProperty").typedInput({
+                default: 'msg',
+                types: ['msg'],
+                typeField: $("#node-input-triggerPropertyType")
+            });
+        },
+        icon: "serial.png",
+        label: function () {
+            return this.name || "multi click";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="multi click">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-triggerProperty"><i class="fa fa-tag"></i> Property</label>
+        <input type="text" id="node-input-triggerProperty" placeholder="Trigger" style="width:250px;">
+        <input type="hidden" id="node-input-triggerPropertyType">
+    </div>
+    <hr />
+    <div class="form-row">
+        <label for="node-input-eventDown"><i class="fa fa-tag"></i> Event down</label>
+        <input type="text" id="node-input-eventDown" placeholder="pressed">
+    </div>
+    <div class="form-row">
+        <label for="node-input-eventUp"><i class="fa fa-tag"></i> Event up</label>
+        <input type="text" id="node-input-eventUp" placeholder="released">
+    </div>
+    <div class="form-row">
+        <label for="node-input-timeout"><i class="fa fa-tag"></i> Timeout</label>
+        <input type="number" id="node-input-timeout" placeholder="250">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="multi click">
+    <p>A simple node that takes a button down/up event and provides single and double-press events, as well as hold/release events.</p>
+</script>

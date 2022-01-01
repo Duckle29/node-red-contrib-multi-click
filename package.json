@@ -1,0 +1,19 @@
+{
+  "name": "node-red-contrib-multi-click",
+  "version": "0.0.1",
+  "description": "A node-red node that converts button-down and button-up events to single, double, hold and release events",
+  "author": {
+    "name": "Mikkel Jeppesen",
+    "url": "https://mikkel.cc"
+  },
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "node-red"
+  ],
+  "node-red": {
+    "version": ">=2.0.0",
+    "nodes": {
+      "multi-click": "src/multi-click.js"
+    }
+  }
+}
