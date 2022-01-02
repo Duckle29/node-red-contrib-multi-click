@@ -26,11 +26,11 @@ module.exports = function(RED) {
                 switch(node.state)
                 {
                     case "up":
-                        node.send([{payload: "single"},,,]);
+                        node.send([msg,,,]);
                         node.state = "idle";
                         break;
                     case "down1":
-                        node.send([,,{payload: "held"},]);
+                        node.send([,,msg,]);
                         node.state = "held";
                         break;
                     default:
@@ -51,7 +51,7 @@ module.exports = function(RED) {
                         }, node.timeout);
                         break;
                     case "up":
-                        node.send([,{payload: "double"},,]);
+                        node.send([,msg,,]);
                         node.state = "idle";
                         break;
                 }
@@ -69,7 +69,7 @@ module.exports = function(RED) {
                         }, node.timeout);
                         break;
                     case "held":
-                        node.send([,,,{payload: "released"}]);
+                        node.send([,,,msg]);
                         node.state = "idle";
                         break;
                 }
