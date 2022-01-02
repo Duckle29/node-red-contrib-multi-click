@@ -26,10 +26,12 @@ module.exports = function(RED) {
                 switch(node.state)
                 {
                     case "up":
+                        msg.type = "single";
                         node.send([msg,,,]);
                         node.state = "idle";
                         break;
                     case "down1":
+                        msg.type = "held";
                         node.send([,,msg,]);
                         node.state = "held";
                         break;
@@ -51,6 +53,7 @@ module.exports = function(RED) {
                         }, node.timeout);
                         break;
                     case "up":
+                        msg.type = "double";
                         node.send([,msg,,]);
                         node.state = "idle";
                         break;
@@ -69,6 +72,7 @@ module.exports = function(RED) {
                         }, node.timeout);
                         break;
                     case "held":
+                        msg.type = "released";
                         node.send([,,,msg]);
                         node.state = "idle";
                         break;
